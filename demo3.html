@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{padding: 0;margin: 0;}
+        .rollBoxOne{
+            position: relative;
+            width: 500px;
+            height: 250px;
+            margin: 30px auto;
+        }
+        .rollBoxOne .active{background: red;}
+        .rollBoxOne ul li{
+            list-style-type: none;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            filter: alpha(opacity:0);
+        }
+        .rollBoxOne ol{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        .rollBoxOne ol li {float: left;
+            list-style-type: none;
+            margin: 3px;
+            padding: 0 4px;
+            border: 1px solid black;
+            background: white;
+            cursor: pointer;
+        }
+    </style>
+    <script type="text/javascript" src="style/move2.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var oImgFather = document.getElementById('imgFather');
+            var oBtnFather = document.getElementById('btn');
+            var aImg = oImgFather.getElementsByTagName('li');
+            var aBtn = oBtnFather.getElementsByTagName('li');
+            for(var i= 0; i<aImg.length; i++){
+                aBtn[i].index = i;
+                aBtn[i].onmouseover = function () {
+                    for(var i = 0;i<aBtn.length; i++){
+                        aBtn[i].className = '';
+                        starMove(aImg[i],{opacity:0}, function () {
+                            aImg[i].style.display = 'none';
+                        })
+
+                    }
+                    this.className = 'active';
+                    aImg[this.index].style.display = 'block';
+                    starMove(aImg[this.index],{opacity:100});
+                }
+
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="rollBoxOne">
+    <ul id="imgFather">
+        <li style="display: block; opacity: 1;filter: alpha(opacity:100)"><img src="images/1.jpg" alt="第一个推广链接"></li>
+        <li><img src="images/2.jpg" alt="第二个推广链接"></li>
+        <li><img src="images/3.jpg" alt="第三个推广链接"></li>
+        <li><img src="images/4.jpg" alt="第四个推广链接"></li>
+        <li><img src="images/5.jpg" alt="第五个推广链接"></li>
+    </ul>
+    <ol id="btn">
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ol>
+</div>
+</body>
+</html>
